@@ -21,3 +21,14 @@ Scenario Outline: Valid triangles are recognized
       |     1 |     2 |     1 | boundary test     |
       
 
+Scenario Outline: Equilateral triangles are recognized
+    Given the side length values <side1>, <side1>, <side1>
+    When ask the triangle type oracle is asked
+    Then the triangle type is "Equilateral"
+  
+    Examples:
+      | side1 | comment           |
+      |     1 | smoke test        |
+      |    10 | smoke test        |
+      |   100 | smoke test        |
+   

@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 public class TriangleOracle {
 
-    public enum TriangleType { Scalene, Invalid }; 
+    public enum TriangleType { Scalene, Invalid, Equilateral }; 
     Map<Integer, Integer> entries = new TreeMap<Integer,Integer>();
     int sum = 0;
     int maxLength = 0;
@@ -15,9 +15,14 @@ public class TriangleOracle {
         storeSideLength(side2);
         storeSideLength(side3);
 
+        if (entries.size() == 1) {
+            return TriangleType.Equilateral;
+        }
         if (2*maxLength >= sum) { 
             return TriangleType.Invalid;
         }
+        
+        
         return TriangleType.Scalene;
     }
     
