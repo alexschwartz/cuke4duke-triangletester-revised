@@ -4,7 +4,7 @@ Feature: Triangle types are recognized for given side length value triples
   I want 
 
 Scenario: Valid triangles are recognized
-	Given the side length values 2, 3, 1
+	Given the side length values 10, 8, 3
 	When ask the triangle type oracle is asked
 	Then the triangle type is "Scalene"
 
