@@ -31,4 +31,23 @@ Scenario Outline: Equilateral triangles are recognized
       |     1 | smoke test        |
       |    10 | smoke test        |
       |   100 | smoke test        |
+      
+Scenario Outline: Isosceles triangles are recognized
+    Given the side length values <side1>, <side2>, <side3>
+    When ask the triangle type oracle is asked
+    Then the triangle type is "Isosceles"
+    
+    Examples:
+      | side1 | side2 | side3 | comment           |
+      |     3 |     2 |     2 | smoke test        |
+      |     2 |     3 |     2 | smoke test, order |
+      |     2 |     2 |     3 | smoke test, order |
+      |   101 |    20 |   101 | smoke test     |
+      |   101 |   100 |   101 | boundary test     |
+      
+Scenario: an Isosceles but invalid triangle is recognized
+    Given the side length values 100, 100, 999
+    When ask the triangle type oracle is asked
+    Then the triangle type is "Invalid"
+
    

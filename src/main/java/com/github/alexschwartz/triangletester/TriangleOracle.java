@@ -5,12 +5,15 @@ import java.util.TreeMap;
 
 public class TriangleOracle {
 
-    public enum TriangleType { Scalene, Invalid, Equilateral }; 
-    Map<Integer, Integer> entries = new TreeMap<Integer,Integer>();
-    int sum = 0;
-    int maxLength = 0;
+    public enum TriangleType { Scalene, Invalid, Equilateral, Isosceles, Right }; 
+   
+    private final Map<Double, Integer> entries = new TreeMap<Double,Integer>();
+    
+    private double sum = 0;
+    private double maxLength = 0;
+    private double sumSqr;
 
-    public TriangleType analyze(int side1, int side2, int side3) {
+    public TriangleType analyze(double side1, double side2, double side3) {
         storeSideLength(side1);
         storeSideLength(side2);
         storeSideLength(side3);
@@ -18,23 +21,35 @@ public class TriangleOracle {
         if (entries.size() == 1) {
             return TriangleType.Equilateral;
         }
+        
         if (2*maxLength >= sum) { 
             return TriangleType.Invalid;
         }
         
+        if (entries.size() == 2) {
+            return TriangleType.Isosceles;
+        }
+        
+        // is a^2 + b^2 = c^2 ??
+        double maxSqr = maxLength*maxLength;
+        
+        if (this.sumSqr == 2*maxSqr) { 
+            return TriangleType.Right;
+        }
         
         return TriangleType.Scalene;
     }
     
-    void storeSideLength(int length) {
-        Integer entry = entries.get(length);
-        int oldNumber =  entry == null ? 0 : entry;
-        entries.put(length, oldNumber + 1); 
+    void storeSideLength(final double side1) {
+        final Integer entry = entries.get(side1);
+        final int oldNumber =  entry == null ? 0 : entry;
+        this.entries.put(side1, oldNumber + 1); 
         
-        sum += length;
+        this.sum += side1;
+        this.sumSqr += side1 * side1;
         
-        if (maxLength < length) {
-            maxLength = length;
+        if (this.maxLength < side1) {
+            this.maxLength = side1;
         }
     }
 
