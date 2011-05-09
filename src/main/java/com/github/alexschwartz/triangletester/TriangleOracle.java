@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 public class TriangleOracle {
 
-    public enum TriangleType { Scalene, Invalid, Equilateral, Isosceles, Right }; 
+    public enum TriangleType { Scalene, Invalid, Equilateral, Isosceles, Right_Scalene, Right_Isosceles }; 
    
     private final Map<Double, Integer> entries = new TreeMap<Double,Integer>();
     
@@ -26,16 +26,21 @@ public class TriangleOracle {
             return TriangleType.Invalid;
         }
         
-        if (entries.size() == 2) {
+        final double maxSqr = maxLength*maxLength;
+        final boolean isRight = (Math.abs(this.sumSqr - 2*maxSqr) < 0.01); // is a^2 + b^2 = c^2 ??
+        final boolean isIso = entries.size() == 2;
+        
+        if (isRight && isIso) { 
+           return TriangleType.Right_Isosceles;
+        }
+        
+        if (isIso) {
             return TriangleType.Isosceles;
         }
         
-        // is a^2 + b^2 = c^2 ??
-        double maxSqr = maxLength*maxLength;
-        
-        if (this.sumSqr == 2*maxSqr) { 
-            return TriangleType.Right;
-        }
+        if (isRight) { 
+            return TriangleType.Right_Scalene;
+         }
         
         return TriangleType.Scalene;
     }

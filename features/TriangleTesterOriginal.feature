@@ -11,7 +11,7 @@ Feature: Triangle Page
     Examples:
       | side1 | side2 | side3 | triangle_type |
       | 1 | 1 | 1 | Equilateral |
-      | 3 | 4 | 5 | Right |
+      | 3 | 4 | 5 | Right_Scalene |
       | 4 | 5 | 6 | Scalene |
       | 2 | 5 | 6 | Scalene |
       | 4.2 | 5.6 | 6.1 | Scalene |

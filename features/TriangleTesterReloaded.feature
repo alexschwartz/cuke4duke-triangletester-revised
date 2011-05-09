@@ -50,4 +50,14 @@ Scenario: an Isosceles but invalid triangle is recognized
     When ask the triangle type oracle is asked
     Then the triangle type is "Invalid"
 
-   
+Scenario: a "Right Scalene" triangle is recognized
+    Given the side length values 3, 4, 5
+    When ask the triangle type oracle is asked
+    Then the triangle type is "Right_Scalene"
+
+Scenario: a "Right Isosceles" triangle is recognized
+    Given the side length values 2, 2, 2.82842712
+    When ask the triangle type oracle is asked
+    Then the triangle type is "Right_Isosceles"
+
+    
